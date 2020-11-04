@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>KFMMC - Patients Page </title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.css">
+<link rel="stylesheet" type="text/css" media="screen" href="./css/styles.css" />
+<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
+<script src="http://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+
+</head>
+
+<body>
+  <div class="header">
+    <img src="../images/KFMMC_LogoEn.png"alt="KFMMC" style="width:650px;height:200px;">
+ </div>
+
+ <div class="navigationBar">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a class="active1" href="/patients">Patients</a></li>
+      <li style="float:right"><a href="/login">Logout</a></li>
+    </ul>
+ </div>
+  
+
+ <div class="row">
+  <div class="side">
+    <h6><strong>Patient Count Section</strong></h6>
+    <a href="/patientCountYear" >Patient Year Count</a>
+    <a href="/patientCountDatePeriod">Patient Date Or Period Count</a>
+    <a href="/patientCountDatePeriodSymptom">Patient Date Or Period Disease Count</a>
+
+    <h6><strong>Patient Details Section</strong></h6>
+    <a href="/patientDetailsYear">Patient Details For Year</a>
+    <a href="/patientDetailsDatePeriod">Patient Details For Date Or Period</a>
+    <a href="/patientDetailsDatePeriodSymptom" class="active2">Patient Details Date Or Period Disease </a>
+
+    <h6><strong>Patient Count Comparison Section</strong></h6>
+    <a href="/patientCountYearComparison">Patient Year Count Comparison</a>
+    <a href="/patientCountDatePeriodComparison">Patient Date Or Period Count Comparison</a>
+    <a href="/patientCountDatePeriodSymptomComparison">Patient Date Or Period Disease Count Comparison</a>
+  </div>
+
+  <div class="main">
+    <br>
+    <br>
+    <h5 style="color:red;"><strong>Select a specific date or specific period </strong> </h5>
+    <br>
+    <br>
+              <select id="myDiseaseSelect">
+                <option>Abdominal Pain</option>
+                <option>Back Pain</option>
+                <option>Chest  Pain</option>
+                <option>Cold</option>
+                <option>Diabetes</option>
+                <option>Dizziness</option>
+                <option>Ear Pain</option>
+                <option>Nose Pain</option>
+                <option>Throat Pain</option>
+                <option>Eyes problems</option>
+                <option>Feet Pain</option>
+                <option>Fever</option>
+                <option>Cough</option>
+                <option>Vomiting</option>
+                <option>Flack Pain</option>
+                <option>Head Trauma</option>
+                <option>Headache</option>  
+                <option>Migraine</option>
+                <option>Heart Burn</option>
+                <option>High blood pressures</option>
+                <option>Neck Pain</option>
+                <option>Shortness of Breath</option>
+                <option>Sleeping problems</option>
+                <option>Toothache</option>
+              </select>
+              <br>  
+              <br> 
+
+              <div class="input-form input-daterange"> 
+                
+                <label  id="start-p" for="start">Start Date</label>
+                <input type="text" id="start" >
+                <span class="fa fa-calendar" id="fa-1"></span>
+                <label  id="end-p" for="end">End Date</label>
+                <input type="text" id="end" >  
+                <span class="fa fa-calendar" id="fa-2"></span> 
+               
+               </div>
+               <br>
+    <br>
+               <button type="submit" id="btnDateRangeSymptom" class="btn btn-secondary">Submit</button>
+               <br>
+               <br>
+
+               <table id="example" class="display" cellspacing="0" width="80%" font-size="12px" >
+                <thead font-size="12px">
+                </thead >
+               
+               <tfoot font-size="12px">  
+               </tfoot>
+               
+               <tbody font-size="12px">
+               </tbody>
+                 
+              </table>
+             
+               
+             <script>
+             $(document).ready(function(){
+                 $('.input-daterange').datepicker({
+                     format: 'dd-mm-yyyy',
+                     autoclose: true,
+                     calendarWeeks : true,
+                     clearBtn: true,
+                     disableTouchKeyboard: true
+                 });
+             });
+             </script>
+
+            <br>
+
+            <script type="text/javascript">
+              const btnSymptom = document.getElementById("btnDateRangeSymptom");
+              const start = document.getElementById("start");
+              const end = document.getElementById("end");
+
+              function myDiseaseFunction () {
+                const optionSelected = document.getElementById("myDiseaseSelect");
+                const i = optionSelected.selectedIndex;
+                const symptoms = optionSelected.options[i].value;
+                return symptoms;
+              }
+
+              btnSymptom.addEventListener("click", async() =>{
+                const symptoms = await myDiseaseFunction();
+                if (start.value != end.value) {
+                  const result = await fetch("/range/details/symptoms", {"method": "POST", "headers": {"content-type": "application/json"}, "body": JSON.stringify({"start": start.value, "end": end.value, "symptoms": symptoms})});
+                  if(result.status === 200){
+                  const jResult = await result.json();
+                    loadTable(jResult);
+                  }
+                } else {
+                  const result = await fetch("/date/details/symptoms", {"method": "POST", "headers": {"content-type": "application/json"}, "body": JSON.stringify({"date": start.value, "symptoms": symptoms})});
+                  if (result.status === 200){
+                    const jResult = await result.json();
+                    loadTable(jResult);
+                  }
+                }
+              });
+
+              function loadTable(jResult){
+                var details = '';
+                  for (var i=0; i < jResult.length; i++){
+                      // console.log(jResult[i]);
+                      details += '<tr>';
+                      details += '<td>' + jResult[i].med_rec_no + '</td>';
+                      details += '<td>' + jResult[i].ERphysicianDate + '</td>';
+                      details += '<td>' + jResult[i].ERPhysicianSeentime + '</td>';
+                      details += '<td>' + jResult[i].ArrivalDate + '</td>';
+                      details += '<td>' + jResult[i].Arrivaltime + '</td>';
+                      details += '<td>' + jResult[i].PresentComplaint + '</td>';
+                      details += '<td>' + jResult[i].TriageDate + '</td>';
+                      details += '<td>' + jResult[i].DRNO + '</td>';
+                      // details += '<td>' + jResult[i].DRName + '</td>';
+                      details += '</tr>';
+                  }
+                  document.querySelector("#example thead").innerHTML = '<tr> <th>med_rec_no</th> <th>ERphysicianDate</th> <th>ERPhysicianSeentime</th> <th>ArrivalDate</th> <th>Arrivaltime</th><th>PresentComplaint</th> <th>TriageDate</th> <th>DRNO</th> </tr>';
+                  document.querySelector("#example tfoot").innerHTML = '<tr> <th>med_rec_no</th> <th>ERphysicianDate</th> <th>ERPhysicianSeentime</th> <th>ArrivalDate</th> <th>Arrivaltime</th><th>PresentComplaint</th> <th>TriageDate</th> <th>DRNO</th> </tr>';
+                  document.querySelector("#example tbody").innerHTML = details;
+
+                $(document).ready(function() {
+                  $('#example').DataTable( {
+                      destroy: true,
+                      responsive: true,
+                      "pageLength": 10
+                  } );
+                });
+              }
+            </script>
+  </div>
+
+
+<div class="footer">
+  <h2>Footer</h2>
+</div>
+
+</body>
+</html>

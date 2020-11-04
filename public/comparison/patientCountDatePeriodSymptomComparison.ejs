@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>KFMMC - Patients Page </title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.css">
+<link rel="stylesheet" type="text/css" media="screen" href="./css/styles.css" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
+<!-- <script src="./js/scripts.js"></script> -->
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+</head>
+
+<body>
+  <div class="header">
+    <img src="../images/KFMMC_LogoEn.png" alt="KFMMC" style="width:650px;height:200px;">
+ </div>
+
+ <div class="navigationBar">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a class="active1" href="/patients">Patients</a></li>
+      <li style="float:right"><a href="/login">Logout</a></li>
+    </ul>
+ </div>
+  
+
+ <div class="row">
+  <div class="side">
+    <h6><strong>Patient Count Section</strong></h6>
+    <a href="/patientCountYear">Patient Year Count</a>
+    <a href="/patientCountDatePeriod" >Patient Date Or Period Count</a>
+    <a href="/patientCountDatePeriodSymptom">Patient Date Or Period Disease Count</a>
+
+    <h6><strong>Patient Details Section</strong></h6>
+    <a href="/patientDetailsYear">Patient Details For Year</a>
+    <a href="/patientDetailsDatePeriod">Patient Details For Date Or Period</a>
+    <a href="/patientDetailsDatePeriodSymptom">Patient Details Date Or Period Disease </a>
+
+    <h6><strong>Patient Count Comparison Section</strong></h6>
+    <a href="/patientCountYearComparison">Patient Year Count Comparison</a>
+    <a href="/patientCountDatePeriodComparison" >Patient Date Or Period Count Comparison</a>
+    <a href="/patientCountDatePeriodSymptomComparison" class="active2">Patient Date Or Period Disease Count Comparison</a>
+  </div>
+
+  <div class="main">
+    <br>
+      <br>
+          
+              <p style="color:red;"><strong>Select 1st date or period </strong> </p>
+
+              <div class= "form-group input-daterange"> 
+                <label  id="firstStart-p" for="firstStart"></label>Start Date</label>
+                <input type="text"  id="firstStart" >
+                <span class="fa fa-calendar" id="fa-1"></span>
+                <label  id="firstEnd-p" for="firstEnd">End Date</label> 
+                <input type="text" id="firstEnd" > 
+                <span class="fa fa-calendar" id="fa-1"></span>
+              </div>
+              <p style="color:red;"><strong>Select a symptom  </strong> </p>
+            
+            <select id="1stDiseaseSelect">
+              <option>Abdominal Pain</option>
+                <option>Back Pain</option>
+                <option>Chest  Pain</option>
+                <option>Cold</option>
+                <option>Diabetes</option>
+                <option>Dizziness</option>
+                <option>Ear Pain</option>
+                <option>Nose Pain</option>
+                <option>Throat Pain</option>
+                <option>Eyes problems</option>
+                <option>Feet Pain</option>
+                <option>Fever</option>
+                <option>Cough</option>
+                <option>Vomiting</option>
+                <option>Flack Pain</option>
+                <option>Head Trauma</option>
+                <option>Headache</option>  
+                <option>Migraine</option>
+                <option>Heart Burn</option>
+                <option>High blood pressures</option>
+                <option>Neck Pain</option>
+                <option>Shortness of Breath</option>
+                <option>Sleeping problems</option>
+                <option>Toothache</option>
+              </select>
+            <br> 
+            <br> 
+              <hr class="rounded"> 
+              <p style="color:red;"><strong>Select 2nd date or period </strong> </p>
+              <div class="form-group input-daterange">
+                <label  id="secondStart-p" for="secondStart"></label>Start Date</label>
+                <input type="text"  id="secondStart" >
+                <span class="fa fa-calendar" id="fa-2"></span> 
+                <label  id="secondEnd-p" for="secondEnd">End Date</label> 
+                <input type="text" id="secondEnd" > 
+                <span class="fa fa-calendar" id="fa-2"></span> 
+              </div>
+              <p style="color:red;"><strong>Select a symptoms  </strong> </p>
+
+              <select id="2ndDiseaseSelect">
+                <option>Abdominal Pain</option>
+                <option>Back Pain</option>
+                <option>Chest  Pain</option>
+                <option>Cold</option>
+                <option>Diabetes</option>
+                <option>Dizziness</option>
+                <option>Ear Pain</option>
+                <option>Nose Pain</option>
+                <option>Throat Pain</option>
+                <option>Eyes problems</option>
+                <option>Feet Pain</option>
+                <option>Fever</option>
+                <option>Cough</option>
+                <option>Vomiting</option>
+                <option>Flack Pain</option>
+                <option>Head Trauma</option>
+                <option>Headache</option>  
+                <option>Migraine</option>
+                <option>Heart Burn</option>
+                <option>High blood pressures</option>
+                <option>Neck Pain</option>
+                <option>Shortness of Breath</option>
+                <option>Sleeping problems</option>
+                <option>Toothache</option>
+              </select>
+        
+              <br> 
+              <br>
+              <button type="submit" id="btnCompare" class="btn btn-secondary">Compare</button>
+              <br>
+              <hr class="rounded"> 
+              <br>
+             <div id="chartContainer" style=" display: block; margin-left: auto; margin-right: auto; height: 300px; width: 500px;"></div>
+             <br> 
+              <table id="example" class="display" cellspacing="0" width="100%">
+                <thead>
+                </thead>
+               
+               <tfoot>  
+               </tfoot>
+               
+               <tbody>
+               </tbody>
+                 
+              </table>
+            
+              
+            <script>
+            $(document).ready(function(){
+                $('.input-daterange').datepicker({
+                    format: 'dd-mm-yyyy',
+                    autoclose: true,
+                    calendarWeeks : true,
+                    clearBtn: true,
+                    disableTouchKeyboard: true
+                });
+            });
+            </script>
+  </div>
+
+  <script>
+    const btnCompare = document.getElementById("btnCompare");
+    const firstStart = document.getElementById("firstStart");
+    const firstEnd = document.getElementById("firstEnd");
+    const secondStart = document.getElementById("secondStart");
+    const secondEnd = document.getElementById("secondEnd");
+
+    function myDiseaseFunction (optionSelected) {
+      const i = optionSelected.selectedIndex;
+      const symptoms = optionSelected.options[i].value;
+      return symptoms;
+    }
+
+    btnCompare.addEventListener("click", async()=>{
+      const firstOptionSelected = document.getElementById("1stDiseaseSelect");
+      const secondOptionSelected = document.getElementById("2ndDiseaseSelect");
+
+      const firstSymptom = await myDiseaseFunction(firstOptionSelected);
+      const secondSymptom = await myDiseaseFunction(secondOptionSelected);
+
+      if (firstStart.value === firstEnd.value && secondStart.value === secondEnd.value){
+        const firstResult = await fetch("/date/count/symptoms", {"method": "POST", "headers": {"content-type": "application/json"}, "body": JSON.stringify({"date": firstStart.value, "symptoms": firstSymptom})});
+        const secondResult = await fetch("/date/count/symptoms", {"method": "POST", "headers": {"content-type": "application/json"}, "body": JSON.stringify({"date": secondStart.value, "symptoms": secondSymptom})});
+        
+        if (firstResult.status === 200 & secondResult.status === 200) {
+          const jSecondResult = await secondResult.json();
+          const jFirstResult = await firstResult.json();
+
+          var count = '';
+          count += '<tr>';
+            count += '<td>' + jFirstResult + '</td>';
+            count += '<td>' + jSecondResult + '</td>';
+          count += '</tr>';
+          document.querySelector("#example thead").innerHTML = '<tr> <th>'+ firstStart.value + ' |  ' + firstSymptom +'</th> <th>'+ secondStart.value + ' |  ' + secondSymptom +'</th> </tr>';
+          document.querySelector("#example tbody").innerHTML = count;
+
+          var chart = new CanvasJS.Chart("chartContainer",
+              {
+                title:{
+                  text: "Patients Number "
+                },
+                data: [
+          
+                {
+                  dataPoints: [
+                  { x: 1, y: jFirstResult  , label: firstStart.value + ' |  ' + firstSymptom },
+                  { x: 2, y: jSecondResult, label: secondStart.value + ' |  ' + secondSymptom },
+                  ]
+                }
+                ]
+              });
+          
+              chart.render();
+        }
+      }
+      if (firstStart.value === firstEnd.value && secondStart.value !== secondEnd.value){
+        const firstResult = await fetch("/date/count/symptoms", {"method": "POST", "headers": {"content-type": "application/json"}, "body": JSON.stringify({"date": firstStart.value, "symptoms": firstSymptom})});
+        const secondResult = await fetch("/range/count/symptoms", {"method": "POST", "headers": {"content-type": "application/json"}, "body": JSON.stringify({"start": secondStart.value, "end": secondEnd.value, "symptoms": secondSymptom})});
+        if (firstResult.status === 200 & secondResult.status === 200) {
+          const jSecondResult = await secondResult.json();
+          const jFirstResult = await firstResult.json();
+          var count = '';
+          count += '<tr>';
+            count += '<td>' + jFirstResult + '</td>';
+            count += '<td>' + jSecondResult + '</td>';
+          count += '</tr>';
+          document.querySelector("#example thead").innerHTML = '<tr> <th>'+ firstStart.value + ' |  ' + firstSymptom +'</th> <th>'+ secondStart.value + ' | ' + secondEnd.value + ' |  ' + secondSymptom +'</th> </tr>';
+          document.querySelector("#example tbody").innerHTML = count;
+
+          var chart = new CanvasJS.Chart("chartContainer",
+              {
+                title:{
+                  text: "Patients Number "
+                },
+                data: [
+          
+                {
+                  dataPoints: [
+                  { x: 1, y: jFirstResult  , label: firstStart.value + ' |  ' + firstSymptom },
+                  { x: 2, y: jSecondResult, label: secondStart.value + ' | ' + secondEnd.value + ' |  ' + secondSymptom},
+                  ]
+                }
+                ]
+              });
+          
+              chart.render();
+        }
+      }
+      if (firstStart.value !== firstEnd.value && secondStart.value === secondEnd.value){
+        const firstResult = await fetch("/range/count/symptoms", {"method": "POST", "headers": {"content-type": "application/json"}, "body": JSON.stringify({"start": firstStart.value, "end": firstStart.value, "symptoms": firstSymptom})});
+        const secondResult = await fetch("/date/count/symptoms", {"method": "POST", "headers": {"content-type": "application/json"}, "body": JSON.stringify({"date": secondStart.value, "symptoms": secondSymptom})});
+        if (firstResult.status === 200 & secondResult.status === 200) {
+          const jSecondResult = await secondResult.json();
+          const jFirstResult = await firstResult.json();
+          var count = '';
+          count += '<tr>';
+            count += '<td>' + jFirstResult + '</td>';
+            count += '<td>' + jSecondResult + '</td>';
+          count += '</tr>';
+          document.querySelector("#example thead").innerHTML = '<tr> <th>'+ firstStart.value + ' | ' + firstEnd.value + ' |  ' + firstSymptom +'</th> <th>'+ secondStart.value + ' |  ' + secondSymptom +'</th>  </tr>';
+          document.querySelector("#example tbody").innerHTML = count;
+
+          var chart = new CanvasJS.Chart("chartContainer",
+              {
+                title:{
+                  text: "Patients Number "
+                },
+                data: [
+          
+                {
+                  dataPoints: [
+                  { x: 1, y: jFirstResult  , label: firstStart.value + ' | ' + firstEnd.value + ' |  ' + firstSymptom },
+                  { x: 2, y: jSecondResult, label: secondStart.value + ' |  ' + secondSymptom },
+                  ]
+                }
+                ]
+              });
+          
+              chart.render();
+        }
+      }
+      if (firstStart.value !== firstEnd.value && secondStart.value !== secondEnd.value){
+        const firstResult = await fetch("/range/count/symptoms", {"method": "POST", "headers": {"content-type": "application/json"}, "body": JSON.stringify({"start": firstStart.value, "end": firstEnd.value, "symptoms": firstSymptom})});
+        const secondResult = await fetch("/range/count/symptoms", {"method": "POST", "headers": {"content-type": "application/json"}, "body": JSON.stringify({"start": secondStart.value, "end": secondEnd.value, "symptoms": secondSymptom})});
+        if (firstResult.status === 200 & secondResult.status === 200) {
+          const jSecondResult = await secondResult.json();
+          const jFirstResult = await firstResult.json();
+          var count = '';
+          count += '<tr>';
+            count += '<td>' + jFirstResult + '</td>';
+            count += '<td>' + jSecondResult + '</td>';
+          count += '</tr>';
+          document.querySelector("#example thead").innerHTML = '<tr> <th>'+ firstStart.value + ' | ' + firstEnd.value + ' |  ' + firstSymptom +'</th> <th>'+ secondStart.value + ' | ' + secondEnd.value + ' |  ' + secondSymptom +'</th> </tr>';
+          document.querySelector("#example tbody").innerHTML = count;
+          var chart = new CanvasJS.Chart("chartContainer",
+              {
+                title:{
+                  text: "Patients Number "
+                },
+                data: [
+          
+                {
+                  dataPoints: [
+                  { x: 1, y: jFirstResult  , label: firstStart.value + ' | ' + firstEnd.value + ' |  ' + firstSymptom },
+                  { x: 2, y: jSecondResult, label: secondStart.value + ' | ' + secondEnd.value + ' |  ' + secondSymptom},
+                  ]
+                }
+                ]
+              });
+          
+              chart.render();
+        }
+      }
+    });
+
+  </script>
+ 
+<div class="footer">
+  <h2>Footer</h2>
+</div>
+
+</body>
+</html>
+
+
+

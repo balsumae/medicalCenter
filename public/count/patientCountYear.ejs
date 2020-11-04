@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>KFMMC - Patients Page </title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.css">
+<link rel="stylesheet" type="text/css" media="screen" href="./css/styles.css" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
+<!-- <script src="./js/scripts.js"></script> -->
+
+</head>
+
+<body>
+  <div class="header">
+    <img src="../images/KFMMC_LogoEn.png" alt="KFMMC" style="width:650px;height:200px;">
+ </div>
+
+ <div class="navigationBar">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a class="active1" href="/patients">Patients</a></li>
+      <li style="float:right"><a href="/login">Logout</a></li>
+    </ul>
+ </div>
+  
+
+ <div class="row">
+  <div class="side">
+    <h6><strong>Patient Count Section</strong></h6>
+    <a href="/patientCountYear" class="active2">Patient Year Count</a>
+    <a href="/patientCountDatePeriod">Patient Date Or Period Count</a>
+    <a href="/patientCountDatePeriodSymptom">Patient Date Or Period Disease Count</a>
+
+    <h6><strong>Patient Details Section</strong></h6>
+    <a href="/patientDetailsYear">Patient Details For Year</a>
+    <a href="/patientDetailsDatePeriod">Patient Details For Date Or Period</a>
+    <a href="/patientDetailsDatePeriodSymptom">Patient Details Date Or Period Disease </a>
+
+    <h6><strong>Patient Count Comparison Section</strong></h6>
+    <a href="/patientCountYearComparison">Patient Year Count Comparison</a>
+    <a href="/patientCountDatePeriodComparison">Patient Date Or Period Count Comparison</a>
+    <a href="/patientCountDatePeriodSymptomComparison">Patient Date Or Period Disease Count Comparison</a>
+  </div>
+
+  <div class="main">
+
+    <br>
+              <br>
+    
+    <h5 style="color:red;"><strong>Select a specific year </strong> </h5>
+            <br>
+            <br>
+            
+
+            <form>
+              <select id="mySelect" onchange="myFunction()">
+                <option>Select a year</option>
+                <option>2018</option>
+                <option>2019</option>
+                <option>2020</option>
+              </select>
+            </form>
+            <br>
+              <br>
+            <p id="pYear"></p>
+            <br>
+        
+            <script>
+              async function myFunction () {
+                const optionSelected = document.getElementById("mySelect");
+                const i = optionSelected.selectedIndex;
+                const year = optionSelected.options[i].value;
+                const output = document.getElementById("pYear");
+                //i == 1 || i == 2 || i == 3
+                if (i != 0) {
+                  const result = await fetch("/year/count", {"method": "POST", "headers": {"content-type": "application/json"}, "body": JSON.stringify({"year": year})});
+                  const jResult = await result.json();
+                  const sResult = JSON.stringify(jResult);
+                  output.innerHTML = "The Total Number of Patients: " + sResult;
+                } else {
+                  output.innerHTML = "";
+                }
+              }
+            </script>
+  </div>
+
+
+<div class="footer">
+  <h2>Footer</h2>
+</div>
+
+</body>
+</html>

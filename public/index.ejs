@@ -1,0 +1,710 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>KFMMC - Home Page</title>
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.css">
+<link rel="stylesheet" type="text/css" media="screen" href="./css/styles.css" />
+<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
+<script src="./js/scripts.js"></script>
+<script src="http://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+
+</head>
+
+<body>
+  <div class="header">
+    <img src="../images/KFMMC_LogoEn.png" alt="KFMMC" style="width:650px;height:200px;">
+ </div>
+
+ <div class="navigationBar">
+  <ul>
+    <li><a class="active1" href="/">Home</a></li>
+    <li><a href="/patients">Patients</a></li>
+    <li style="float:right"><a href="/login">Logout</a></li>
+  </ul>
+</div>
+  
+
+ <div class="row">
+  
+  <div class="side">
+    
+  </div>
+
+  
+
+  <div class="main">
+
+    <h3>Home</h3>
+    
+    
+  </div>
+
+ 
+ 
+
+
+
+<div class="footer">
+  <h2>Footer</h2>
+</div>
+
+
+<script>
+  /* When the user clicks on the button, 
+  toggle between hiding and showing the dropdown content */
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+  
+  // Close the dropdown if the user clicks outside of it
+  window.onclick = function(e) {
+    if (!e.target.matches('.dropbtn')) {
+    var myDropdown = document.getElementById("myDropdown");
+      if (myDropdown.classList.contains('show')) {
+        myDropdown.classList.remove('show');
+      }
+    }
+  }
+  </script>
+
+
+
+</body>
+</html>
+
+
+<!-- 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Page Title</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+
+
+/* Style the body */
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Arial;
+}
+
+/* Header/logo Title */
+.header {
+  padding: 5px;
+  background: white;
+  color: white;
+}
+
+/* Increase the font size of the heading */
+.header h1 {
+  font-size: 40px;
+}
+
+/* Column container */
+.row {  
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+  -ms-flex: 20%; /* IE10 */
+  flex: 20%;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+/* Main column */
+.main {   
+  -ms-flex: 80%; /* IE10 */
+  flex: 80%;
+  background-color: #efffea;
+  padding: 20px;
+}
+
+
+/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
+}
+
+/* Style tab links */
+.tablink {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 25%;
+}
+
+.tablink:hover {
+  background-color: #777;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+  color: black;
+  display: none;
+  padding: 100px 20px;
+  height: 100%;
+}
+
+/* .month {
+  padding: 70px 25px;
+  width: 100%;
+  background: #1abc9c;
+  text-align: center;
+}
+
+.month ul {
+  margin: 0;
+  padding: 0;
+}
+
+.month ul li {
+  color: white;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.month .prev {
+  float: left;
+  padding-top: 10px;
+}
+
+.month .next {
+  float: right;
+  padding-top: 10px;
+}
+
+.weekdays {
+  margin: 0;
+  padding: 10px 0;
+  background-color: #ddd;
+}
+
+.weekdays li {
+  display: inline-block;
+  width: 13.6%;
+  color: #666;
+  text-align: center;
+}
+
+.days {
+  padding: 10px 0;
+  background: #eee;
+  margin: 0;
+}
+
+.days li {
+  list-style-type: none;
+  display: inline-block;
+  width: 13.6%;
+  text-align: center;
+  margin-bottom: 5px;
+  font-size:12px;
+  color: #777;
+}
+
+.days li .active {
+  padding: 5px;
+  background: #1abc9c;
+  color: white !important
+}
+
+/* Add media queries for smaller screens */
+@media screen and (max-width:720px) {
+  .weekdays li, .days li {width: 13.1%;}
+}
+
+@media screen and (max-width: 420px) {
+  .weekdays li, .days li {width: 12.5%;}
+  .days li .active {padding: 2px;}
+}
+
+@media screen and (max-width: 290px) {
+  .weekdays li, .days li {width: 12.2%;}
+} 
+
+/* ///// */
+
+
+body {
+    color: #000;
+    overflow-x: hidden;
+    height: 100%;
+    background-color: #C5CAE9 !important;
+    background-repeat: no-repeat;
+    padding: 0 !important
+}
+
+.container {
+    padding-top: 120px;
+    padding-bottom: 120px
+}
+
+input {
+    padding: 22px 15px !important;
+    border: 1px solid #CFD8DC !important;
+    border-radius: 4px !important;
+    box-sizing: border-box;
+    background-color: #fff !important;
+    color: #000 !important;
+    font-size: 16px !important;
+    letter-spacing: 1px;
+    position: relative
+}
+
+input:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #1976D2 !important;
+    outline-width: 0
+}
+
+.fa-calendar {
+    position: absolute;
+    top: 13px;
+    font-size: 20px;
+    color: #1976D2;
+    z-index: 1000
+}
+
+#fa-1 {
+    left: calc(50% - 40px)
+}
+
+#fa-2 {
+    left: calc(100% - 40px)
+}
+
+.form-control-placeholder {
+    position: absolute;
+    top: -10px !important;
+    padding: 12px 2px 0 2px;
+    opacity: 0.5
+}
+
+#end-p {
+    left: calc(50% + 4px)
+}
+
+.form-control:focus+.form-control-placeholder,
+.form-control:valid+.form-control-placeholder {
+    font-size: 95%;
+    top: 10px;
+    transform: translate3d(0, -100%, 0);
+    opacity: 1
+}
+
+::placeholder {
+    color: #BDBDBD;
+    opacity: 1
+}
+
+:-ms-input-placeholder {
+    color: #BDBDBD
+}
+
+::-ms-input-placeholder {
+    color: #BDBDBD
+}
+
+button:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    outline-width: 0
+}
+
+.datepicker {
+    background-color: #fff;
+    border-radius: 0 !important;
+    align-content: center !important;
+    padding: 0 !important
+}
+
+.datepicker-dropdown {
+    top: 180px !important;
+    left: calc(50% - 173.5px) !important;
+    border-right: #1976D2;
+    border-left: #1976D2
+}
+
+.datepicker-dropdown.datepicker-orient-left:before {
+    left: calc(50% - 6px) !important
+}
+
+.datepicker-dropdown.datepicker-orient-left:after {
+    left: calc(50% - 5px) !important;
+    border-bottom-color: #1976D2
+}
+
+.datepicker-dropdown.datepicker-orient-right:after {
+    border-bottom-color: #1976D2
+}
+
+.datepicker table tr td.today,
+span.focused {
+    border-radius: 50% !important;
+    background-image: linear-gradient(#FFF3E0, #FFE0B2)
+}
+
+thead tr:nth-child(2) {
+    background-color: #1976D2 !important
+}
+
+thead tr:nth-child(3) th {
+    font-weight: bold !important;
+    padding: 20px 10px !important;
+    color: #BDBDBD !important
+}
+
+tbody tr td {
+    padding: 10px !important
+}
+
+tfoot tr:nth-child(2) th {
+    padding: 10px !important;
+    border-top: 1px solid #CFD8DC !important
+}
+
+.cw {
+    font-size: 14px !important;
+    background-color: #E8EAF6 !important;
+    border-radius: 0px !important;
+    padding: 0px 20px !important;
+    margin-right: 10px solid #fff !important
+}
+
+.old,
+.day,
+.new {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 0px !important
+}
+
+.day.old,
+.day.new {
+    color: #E0E0E0 !important
+}
+
+.day.old:hover,
+.day.new:hover {
+    border-radius: 50% !important
+}
+
+.old-day:hover,
+.day:hover,
+.new-day:hover,
+.month:hover,
+.year:hover,
+.decade:hover,
+.century:hover {
+    border-radius: 50% !important;
+    background-color: #eee
+}
+
+.active {
+    border-radius: 50% !important;
+    background-image: linear-gradient(#1976D2, #1976D2) !important;
+    color: #fff !important
+}
+
+.range-start,
+.range-end {
+    border-radius: 50% !important;
+    background-image: linear-gradient(#1976D2, #1976D2) !important
+}
+
+.range {
+    background-color: #E3F2FD !important
+}
+
+.prev,
+.next,
+.datepicker-switch {
+    border-radius: 0 !important;
+    padding: 10px 10px 10px 10px !important;
+    font-size: 18px;
+    opacity: 0.7;
+    color: #fff
+}
+
+.prev:hover,
+.next:hover,
+.datepicker-switch:hover {
+    background-color: inherit !important;
+    opacity: 1
+}
+
+@media screen and (max-width: 726px) {
+    .datepicker-dropdown.datepicker-orient-right:before {
+        right: calc(50% - 6px)
+    }
+
+    .datepicker-dropdown.datepicker-orient-right:after {
+        right: calc(50% - 5px)
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+    <img src="http://www.kfmmc.med.sa/images/KFMMC_LogoEn.png" alt="KFMMC" style="width:650px;height:200px;">
+</div>
+
+<button class="tablink" onclick="openPage('Home', this, '#4CAF50')" id="defaultOpen">Home</button>
+<button class="tablink" onclick="openPage('Patients', this, '#4CAF50')">Patients</button>
+<button class="tablink" onclick="openPage('Contact', this, '#4CAF50')">Contact</button>
+<button class="tablink" onclick="openPage('About', this, '#4CAF50')">About</button>
+
+<div class="row">
+  <div class="side">
+
+  </div>
+
+  <div class="main">
+
+      <div id="Home" class="tabcontent">
+        <h3>Home</h3>
+        <div class="container px-1 px-sm-1 mx-auto">
+          <form autocomplete="off">
+              <div class="flex-row  justify-content-center">
+                  <div class="col-lg-6 col-11 px-1">
+                      <div class="input-group input-daterange"> <input type="text" id="start" class="form-control text-left mr-2"> <label class="ml-3 form-control-placeholder" id="start-p" for="start">Start Date</label> <span class="fa fa-calendar" id="fa-1"></span> <input type="text" id="end" class="form-control text-left ml-2"> <label class="ml-3 form-control-placeholder" id="end-p" for="end">End Date</label> <span class="fa fa-calendar" id="fa-2"></span> </div>
+                  </div>
+              </div>
+          </form>
+      </div>
+      </div>
+
+      <script>
+
+          $(document).ready(function(){
+
+          $('.input-daterange').datepicker({
+          format: 'dd-mm-yyyy',
+          autoclose: true,
+          calendarWeeks : true,
+          clearBtn: true,
+          disableTouchKeyboard: true
+          });
+
+          });
+      </script>
+
+      <div id="Patients" class="tabcontent">
+        
+        <h3 style="color:rgb(120, 120, 120);">Number Of Patients</h3>
+        <ul>
+          
+          <li>During a Specific Date</li>
+            <form action="/date" method="POST">
+            <input type="date" id="date" name="date" min="2018-01-01" value="2020-01-01">
+            <input type="submit">
+            <button id="btnDate">Submit</button>
+           </form> -->
+            <!-- <br>
+            <p id="pDate"></p>
+
+            <table id="gateway-dailyDiagnostic-table" class="display">
+              <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                        <th>Type</th>
+                        <th>Result</th>
+    
+                  </tr>
+              </thead>
+              <tbody>
+              </tbody>
+          </table>  -->
+          <!-- <br> -->
+          <!-- <li>During a Specific week</li>
+            <form action="/homePage" method="POST">
+              <input type="week" id="week" name="week" min="2018-W01" value="2020-W01"> 
+              <input type="submit">
+            </form>
+          <br>   -->
+          <!-- <li>During a Specific Month</li>
+             <form action="/month" method="POST"> -->
+              <!-- <input type="month" id="month" name="month" min="2018-01" value="2018-05">
+              <button id="btnMonth">Submit</button>
+              <br>
+              <p id="pMonth"></p>
+              <input type="submit"> -->
+            <!-- </form> -->
+          <!-- <br>    -->
+          <!-- <li for="year">During a Specific Year</li> 
+          <form action="/year" id="year" mothod="POST">
+            <input type="submit" value="Submit">
+          </form>
+          <select id="year" name="year" form="year">
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+          </select> -->
+
+            
+<!--           
+        </ul>  
+      </div>
+
+      <div id="Contact" class="tabcontent">
+        <h3>Contact</h3>
+
+          
+      </div>
+
+      <div id="About" class="tabcontent">
+
+      </div> -->
+
+<!-- 
+      <script>
+        const btnDate = document.getElementById("btnDate");
+        const date = document.getElementById("date");
+        const btnMonth = document.getElementById("btnMonth");
+        const month = document.getElementById("month");
+
+        btnDate.addEventListener("click", async() =>{
+          const result = await fetch("/date", {"method": "POST", "headers": {"content-type": "application/json"}, "body": JSON.stringify({"date": date.value})});
+          const jResult = await result.json();
+          const output = document.getElementById("pDate");
+          output.innerHTML = JSON.stringify(jResult);
+          // alert(JSON.stringify(jResult))
+        });
+
+        btnMonth.addEventListener("click", async() => {
+          const result = await fetch("/month", {"method": "POST", "headers": {"content-type": "application/json"}, "body": JSON.stringify({"month": month.value})});
+          const jResult = await result.json();
+          const output = document.getElementById("pMonth");
+          output.innerHTML = JSON.stringify(jResult);
+        });
+        
+      function openPage(pageName,elmnt,color) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].style.backgroundColor = "";
+        }
+        document.getElementById(pageName).style.display = "block";
+        elmnt.style.backgroundColor = color;
+      }
+
+      // Get the element with id="defaultOpen" and click on it
+      document.getElementById("defaultOpen").click(); -->
+      
+
+<!--       
+      // output.innerHTML = JSON.stringify(recordsetDate);
+      // console.log(Batool);
+      // console.log(recordsetDate);
+
+
+      // function loadFocusGatewayData(gatewayId){
+      //   dailyDiagnosticTable = $("#gateway-dailyDiagnostic-table").DataTable( {
+    	// 		ajax: {
+      //   			url:"./api/clientSide/dailyDiagnostic/" + ,
+      //   			dataSrc: function (json) {
+		  //     					var return_data = new Array();
+		  //     					for(var i=0;i< json.length; i++){
+
+		  //     						if(json[i].Result){
+
+		  //     							let timeEpoch = json[i].TimeStamp;
+		  //     							let d = new Date(0);
+		  //     							d.setUTCSeconds(timeEpoch);
+
+		  //     							let date = d.toLocaleDateString();
+		  //     							let time = d.toLocaleTimeString();
+
+		  //     							return_data.push({
+			//       							Date: date,
+			//       							Time: time,
+			//       							Type: json[i].Type,
+			//       							Result: json[i].Result
+		  //     							})
+		  //     						}
+		      						
+		      						
+		  //     					}
+		  //     					return return_data;
+    	// 					}
+    	// 		},
+    	// 		columns: [
+			//         { data: "Date" },
+			//         { data: "Time"},
+			//         { data: "Type"},
+			//         { data: "Result"}
+    	// 		],
+    	// 		"order": [[1, 'desc']]
+			// } );
+		
+      // </script> -->
+
+      <!-- <button name="jump" onclick="jump()">Go</button>
+      <script src="scripts.js"></script> -->
+      <!-- <script src="homePage.js"></script> -->
+      <!-- <script src="scripts.js"></script> -->
+<!-- 
+  </div>
+</div> -->
+
+<!-- <div class="footer">
+  <h2>Footer</h2>
+</div>
+
+</body>
+</html> -->
+

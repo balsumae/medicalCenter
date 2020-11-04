@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>KFMMC - Patients Page </title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.css">
+<link rel="stylesheet" type="text/css" media="screen" href="./css/styles.css" />
+<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
+        		
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+<!-- <script src="./js/scripts.js"></script>        		 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>	
+<script src="http://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+</head>
+
+<body>
+  <div class="header">
+    <img src="../images/KFMMC_LogoEn.png"alt="KFMMC" style="width:650px;height:200px;">
+ </div>
+
+ <div class="navigationBar">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a class="active1" href="/patients">Patients</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li style="float:right"><a href="/login">Logout</a></li>
+    </ul>
+ </div>
+  
+
+ <div class="row">
+  <div class="side">
+    <h6><strong>Patient Count Section</strong></h6>
+    <a href="/patientCountYear" >Patient Year Count</a>
+    <a href="/patientCountDatePeriod">Patient Date Or Period Count</a>
+    <a href="/patientCountDatePeriodSymptom">Patient Date Or Period Disease Count</a>
+
+    <h6><strong>Patient Details Section</strong></h6>
+    <a href="/patientDetailsYear">Patient Details For Year</a>
+    <a href="/patientDetailsDatePeriod">Patient Details For Date Or Period</a>
+    <a href="/patientDetailsDatePeriodSymptom">Patient Details Date Or Period Disease </a>
+
+    <h6><strong>Patient Count Comparison Section</strong></h6>
+    <a href="/patientCountYearComparison" class="active2">Patient Year Count Comparison</a>
+    <a href="/patientCountDatePeriodComparison">Patient Date Or Period Count Comparison</a>
+    <a href="/patientCountDatePeriodSymptomComparison">Patient Date Or Period Disease Count Comparison</a>
+  </div>
+  <div class="main">
+
+    <br>
+      <br>
+
+      <h6 style="color:red;"><strong>Select 1st year</strong> </h6>
+      <select id="my1stSelect">
+        <option>Select a year</option>
+        <option>2018</option>
+        <option>2019</option>
+        <option>2020</option>
+      </select>
+      <br>
+      <hr class="rounded"> 
+      <br>
+      <h6 style="color:red;"><strong>Select 2nd year</strong> </h6>
+      <select id="my2ndSelect">
+        <option>Select a year</option>
+        <option>2018</option>
+        <option>2019</option>
+        <option>2020</option>
+      </select>
+      <br>
+      <hr class="rounded"> 
+      <br>
+      <button type="submit" id="btnYears" class="btn btn-secondary">Compare</button> 
+      
+      <hr class="rounded"> 
+
+      <div id="chartContainer" style=" display: block; margin-left: auto; margin-right: auto; height: 300px; width: 340px;"></div>
+
+        <!-- <canvas id="myCanvas" style="  display: block; margin-left: auto; margin-right: auto;"></canvas>
+        <legend for="myCanvas"></legend> -->
+        <br><br>
+
+
+        <table id="example" class="display" cellspacing="0" width="100%">
+          <thead>
+          </thead>
+        
+        <tfoot>  
+        </tfoot>
+        
+        <tbody>
+        </tbody>
+          
+        </table>
+
+        <script type="text/javascript">
+          
+            
+        
+          </script>
+
+        
+
+      <script type="text/javascript">
+      const btnYears = document.getElementById("btnYears");
+      btnYears.addEventListener("click", async()=>{
+        const my1stSelect = document.getElementById("my1stSelect");
+        const i = my1stSelect.selectedIndex;
+        const firstYear = my1stSelect.options[i].value;
+        const my2ndSelect = document.getElementById("my2ndSelect");
+        const j = my2ndSelect.selectedIndex;
+        const secondYear = my2ndSelect.options[j].value;
+        if (i != 0 && j != 0 && i != j){
+          console.log("firstYear= ", firstYear, " secondYear= ", secondYear);
+          const result = await fetch("/year/comparison", {"method": "POST", "headers": {"content-type": "application/json"}, "body": JSON.stringify({"firstYear": firstYear, "secondYear": secondYear})});
+          if (result.status === 200) {
+            const jResult = await result.json();
+            var count = '';
+            count += '<tr>';
+              count += '<td>' + jResult.firstYearRecord + '</td>';
+              count += '<td>' + jResult.secondYearRecord + '</td>';
+            count += '</tr>';
+            document.querySelector("#example thead").innerHTML = '<tr> <th>'+ firstYear +'</th> <th>'+ secondYear +'</th>  </tr>';
+            document.querySelector("#example tbody").innerHTML = count;
+            document.querySelector("#example tbody").innerHTML = count;
+
+            var chart = new CanvasJS.Chart("chartContainer",
+              {
+                title:{
+                  text: "Patients Number During Each Year "
+                },
+                data: [
+                {
+                  dataPoints: [
+                  { x: 1, y: jResult.firstYearRecord , label: firstYear},
+                  { x: 2, y: jResult.secondYearRecord, label: secondYear},
+                  ]
+                }
+                ]
+              });
+              chart.render();
+          }
+        } 
+        // else{
+        //   var newThead = document.createElement('thead');
+        //   var newTbody = document.createElement('tbody');
+        //   document.querySelector("#example thead").replaceWith(newThead);
+        //   document.querySelector("#example tbody").replaceWith(newTbody);
+        // }
+
+      });
+  </script>
+
+
+  </div>
+<div class="footer">
+  <h2>Footer</h2>
+</div>
+
+</body>
+</html>

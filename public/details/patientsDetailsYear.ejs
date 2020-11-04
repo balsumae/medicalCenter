@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>KFMMC - Patients Page </title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.css">
+<link rel="stylesheet" type="text/css" media="screen" href="./css/styles.css" />
+<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
+        		
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>     		
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>	
+<script src="http://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+
+</head>
+
+<body>
+  <div class="header">
+    <img src="../images/KFMMC_LogoEn.png"alt="KFMMC" style="width:650px;height:200px;">
+ </div>
+
+ <div class="navigationBar">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a class="active1" href="/patients">Patients</a></li>
+      <li style="float:right"><a href="/login">Logout</a></li>
+    </ul>
+ </div>
+  
+
+ <div class="row">
+  <div class="side">
+    <h6><strong>Patient Count Section</strong></h6>
+    <a href="/patientCountYear" >Patient Year Count</a>
+    <a href="/patientCountDatePeriod">Patient Date Or Period Count</a>
+    <a href="/patientCountDatePeriodSymptom">Patient Date Or Period Disease Count</a>
+
+    <h6><strong>Patient Details Section</strong></h6>
+    <a href="/patientDetailsYear" class="active2">Patient Details For Year</a>
+    <a href="/patientDetailsDatePeriod">Patient Details For Date Or Period</a>
+    <a href="/patientDetailsDatePeriodSymptom">Patient Details Date Or Period Disease </a>
+
+    <h6><strong>Patient Count Comparison Section</strong></h6>
+    <a href="/patientCountYearComparison">Patient Year Count Comparison</a>
+    <a href="/patientCountDatePeriodComparison">Patient Date Or Period Count Comparison</a>
+    <a href="/patientCountDatePeriodSymptomComparison">Patient Date Or Period Disease Count Comparison</a>
+  </div>
+  <div class="main">
+    <br>
+    <br>
+    <h5 style="color:red;"><strong>Select a specific year</strong> </h5>
+    <br>
+    <br>
+
+    <form>
+      <select id="mySelect" onchange="myFunction()">
+        <option>Select a year</option>
+        <option>2018</option>
+        <option>2019</option>
+        <option>2020</option>
+      </select>
+    </form>
+
+    <br><br>
+
+    <div class="loader-wrapper" id="loader">
+      <span class="loader"><span class="loader-inner"></span></span>
+    </div>
+    <div>
+      <table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+        </thead>
+        
+        <tbody>
+        </tbody>
+
+        <tfoot>  
+        </tfoot>
+      </table>
+    </div>
+  <script type="text/javascript">
+
+    $(window).on("load",function(){
+      $(".loader-wrapper").fadeOut("slow");
+    });
+
+    async function myFunction(){
+      const optionSelected = document.getElementById("mySelect");
+      const j = optionSelected.selectedIndex;
+      const year = optionSelected.options[j].value;
+      if (j == 1 || j == 2 || j == 3) {
+        const result = await fetch("/year/details", {"method": "POST", "headers": {"content-type": "application/json"}, "body": JSON.stringify({"year": year})});
+        const jResult = await result.json();
+        // console.log(result);
+        var details = '';
+
+        for (var i=0; i < jResult.length; i++){
+            // console.log(jResult[i]);
+            details += '<tr>';
+            details += '<td>' + jResult[i].med_rec_no + '</td>';
+            details += '<td>' + jResult[i].ERphysicianDate + '</td>';
+            details += '<td>' + jResult[i].ERPhysicianSeentime + '</td>';
+            details += '<td>' + jResult[i].ArrivalDate + '</td>';
+            details += '<td>' + jResult[i].Arrivaltime + '</td>';
+            details += '<td>' + jResult[i].PresentComplaint + '</td>';
+            details += '<td>' + jResult[i].TriageDate + '</td>';
+            details += '<td>' + jResult[i].DRNO + '</td>';
+            // details += '<td>' + jResult[i].DRName + '</td>';
+            details += '</tr>';
+           
+        }
+
+        
+
+        document.querySelector("#example thead").innerHTML = '<tr> <th>med_rec_no</th> <th>ERphysicianDate</th> <th>ERPhysicianSeentime</th> <th>ArrivalDate</th> <th>Arrivaltime</th><th>PresentComplaint</th> <th>TriageDate</th> <th>DRNO</th> </tr>';
+        document.querySelector("#example tfoot").innerHTML = '<tr> <th>med_rec_no</th> <th>ERphysicianDate</th> <th>ERPhysicianSeentime</th> <th>ArrivalDate</th> <th>Arrivaltime</th><th>PresentComplaint</th> <th>TriageDate</th> <th>DRNO</th> </tr>';
+        document.querySelector("#example tbody").innerHTML = details;
+
+        $(document).ready(function() {
+			   $('#example').DataTable( {
+          destroy: true,
+        responsive: true,
+        "pageLength": 10
+        } );
+		   });
+      }
+  }
+
+  </script>
+
+
+
+    <!-- <form>
+      <select id="mySelect" onchange="myFunction()">
+        <option>Select a year</option>
+        <option>2018</option>
+        <option>2019</option>
+        <option>2020</option>
+      </select>
+    </form>
+    
+    <br>
+    
+      <table id="detailsTable"  class="display" class="table" style="width:80%">
+          <thead>
+              <tr>
+                  <th>med_rec_no</th>
+                  <th>ERphysicianDate</th>
+                  <th>ERPhysicianSeentime</th>
+                  <th>ArrivalDate</th>
+                  <th>Arrivaltime</th>
+                  <th>PresentComplaint</th>
+                  <th>TriageDate</th>
+                  <th>DRNO</th>
+              </tr>
+          </thead>
+          <tbody>
+            
+          </tbody>
+          <tfoot>
+            <tr>
+                <th>med_rec_no</th>
+                <th>ERphysicianDate</th>
+                <th>ERPhysicianSeentime</th>
+                <th>ArrivalDate</th>
+                <th>Arrivaltime</th>
+                <th>PresentComplaint</th>
+                <th>TriageDate</th>
+                <th>DRNO</th>
+            </tr>
+        </tfoot>
+      </table>
+      <script type="text/javascript">
+      async function myFunction(){
+        const optionSelected = document.getElementById("mySelect");
+        const j = optionSelected.selectedIndex;
+        const year = optionSelected.options[j].value;
+        if (j == 1 || j == 2 || j == 3) {
+          const result = await fetch("/year/details", {"method": "POST", "headers": {"content-type": "application/json"}, "body": JSON.stringify({"year": year})});
+          const jResult = await result.json();
+          // console.log(result);
+          var details = '';
+          for (var i=0; i < jResult.length; i++){
+              // console.log(jResult[i]);
+              details += '<tr>';
+              details += '<td>' + jResult[i].med_rec_no + '</td>';
+              details += '<td>' + jResult[i].ERphysicianDate + '</td>';
+              details += '<td>' + jResult[i].ERPhysicianSeentime + '</td>';
+              details += '<td>' + jResult[i].ArrivalDate + '</td>';
+              details += '<td>' + jResult[i].Arrivaltime + '</td>';
+              details += '<td>' + jResult[i].PresentComplaint + '</td>';
+              details += '<td>' + jResult[i].TriageDate + '</td>';
+              details += '<td>' + jResult[i].DRNO + '</td>';
+              // details += '<td>' + jResult[i].DRName + '</td>';
+              details += '</tr>';
+
+             
+          }
+          document.querySelector("#detailsTable tbody").innerHTML = details;
+        }
+    }
+
+
+
+
+
+
+
+    
+    //     $(document).ready( function (){
+    //         $.getJSON(jResult, function (data){
+    //             // console.log(data);
+    //             var patients = '';
+    //             $.each(data, function (key, value){
+    //                 patients += '<tr>';
+    //                 patients += '<td>'+value.med_rec_no+'</td>';
+    //                 patients += '<td>'+value.ERphysicianDate+'</td>';
+    //                 patients += '<td>'+value.ERPhysicianSeentime+'</td>';
+    //                 patients += '<td>'+value.ArrivalDate+'</td>';
+    //                 patients += '<td>'+value.Arrivaltime+'</td>';
+    //                 patients += '<td>'+value.PresentComplaint+'</td>';
+    //                 patients += '<td>'+value.TriageDate+'</td>';
+    //                 patients += '<td>'+value.DRNO+'</td>';
+    //                 patients += '<td>'+value.DRName+'</td>';
+    //                 patients += '</tr>';
+    //             });
+    //             $("#detailsTable").append(patients);
+    //         });
+    //     });
+    //   }
+      
+      /**
+      $(document).ready(()=>{
+            const xhr = new XMLHttpRequest();
+            const year = {year: "2020"};
+            const jsonYear = JSON.stringify(year);
+            xhr.open("POST", "/year/details");
+            xhr.setRequestHeader("content-type", "application/json")
+            xhr.send(jsonYear);
+            xhr.onload = () =>{
+                try{
+                    const json = JSON.parse(this.responseText);
+                    $.getJSON(json, (data)=>{
+                        console.log("data= ",data)
+                        var patients = '';
+                        $.each(data, (key, value)=>{
+                            patients += '<tr>';
+                            patients += '<td>'+value.med_rec_no+'</td>';
+                            patients += '<td>'+value.ERphysicianDate+'</td>';
+                            patients += '<td>'+value.ERPhysicianSeentime+'</td>';
+                            patients += '<td>'+value.ArrivalDate+'</td>';
+                            patients += '<td>'+value.Arrivaltime+'</td>';
+                            patients += '<td>'+value.PresentComplaint+'</td>';
+                            patients += '<td>'+value.TriageDate+'</td>';
+                            patients += '<td>'+value.DRNO+'</td>';
+                            patients += '<td>'+value.DRName+'</td>';
+                            patients += '</tr>';
+                        });
+                        $("#detailsTable").append(patients);
+                    });
+                }catch{
+                    console.log("coud not load...");
+                }
+            }
+            // $.getJSON()
+      });
+      */
+        // const detailsBody = document.querySelector("#detailsTable > tbody")
+
+        // function loadDetails(){
+
+        //     const xhr = new XMLHttpRequest();
+        //     const year = {year: "2020"};
+        //     const jsonYear = JSON.stringify(year);
+        //     xhr.open("POST", "/year/details");
+        //     xhr.setRequestHeader("content-type", "application/json")
+        //     xhr.send(jsonYear);
+        //     xhr.onload = () => {
+        //         try{
+        //             const json = JSON.parse(xhr.responseText);
+        //             console.log("load data...");
+        //             json.map((row) =>{
+        //                 tbodyHtml =+ `
+        //                 <tr>
+        //                     <td>${row.med_rec_no}</td>
+        //                     <td>${row.ERphysicianDate}</td>
+        //                     <td>${row.ERPhysicianSeentime}</td>
+        //                     <td>${row.ArrivalDate}</td>
+        //                     <td>${row.Arrivaltime}</td>
+        //                     <td>${row.PresentComplaint}</td>
+        //                     <td>${row.TriageDate}</td>
+        //                     <td>${row.DRNO}</td>
+        //                     <td>${row.DRName}</td>
+        //                 </tr>
+        //                 `;
+        //             });
+        //             document.querySelector("#detailsTable tbody").innerHTML = tbodyHtml;
+        //             // console.log(json);
+        //             // populateDetails(json);
+        //         }catch (e) {
+        //             console.warn("Coudn't load data ", e);
+        //         }
+        //     }
+        //     // xhr.send();
+        //     // if(xhr.status === 200){
+        //     //     // console.log(xhr.responseText);
+
+        //     // }
+        //     /**
+        //     // request.open("post", "/year/details");
+        //     const result = await fetch("/year/details", {"method": "POST", "headers": {"content-type": "application/json"}, "body": JSON.stringify({"year": year})});
+        //     console.log(result);
+        //     if (result.status === 200){
+        //         // const jResult = await JSON.parse(result.json());
+        //         const jResult = await result.json();
+        //         const strResult = JSON.stringify(jResult);
+        //         // console.log(JSON.stringify(jResult));
+        //         populateDetails(jResult);
+        //     }
+        //     // request.onload = () => {
+        //     //     try{
+        //     //         const json = JSON.parse(request.responseText);
+        //     //         populateDetails(json);
+        //     //     }catch (e) {
+        //     //         console.warn("coudn't load details");
+        //     //     }
+        //     // };
+        //     // request.send();
+        // }
+        
+        // function populateDetails(strResult){
+        //     console.log("length=");
+        //     console.log(strResult.length);
+        //     for (var i=0; i < strResult.length; i++){
+        //         // const tr = document.createElement("tr");
+        //         const row = strResult[i];
+        //         console.log(row);
+        //         for (var j=0; j < row.length;j++){
+        //             // console.log(row[j]);
+        //         }
+
+        //         // detailsBody.appendChild(tr);
+        //     }
+        //     // strResult.forEach((row) => {
+        //     //     console.log(row);
+        //     // });
+        //     // for (let i=0; i <)
+        //     // jResult.
+        //     // jResult.foreach((row) =>{
+        //     //     console.log(row);
+        //     // })*/
+        // }
+        // /*
+        //                   <th>med_rec_no</th>
+        //           <th>ERphysicianDate</th>
+        //           <th>ERPhysicianSeentime</th>
+        //           <th>ArrivalDate</th>
+        //           <th>Arrivaltime</th>
+        //           <th>PresentComplaint</th>
+        //           <th>TriageDate</th>
+        //           <th>DRNO</th>
+        //           <th>DRName</th>
+        // */
+        // function populateDetails(json){
+            
+        //     // for(var i=0; i < json.length; i++){
+        //     //     const tr = document.createElement("tr");
+        //     //     console.log("here= ", i);
+        //     //     json.forEach((row) => {
+        //     //         console.log(row);
+
+
+        //     //     });
+        //     //     detailsBody.appendChild(tr);
+        //     // }
+        // }
+            
+    </script>
+
+  <script type="text/javascript" class="init">
+    $(document).ready(function() {
+      $('#detailsTable').DataTable();
+    });
+  </script> -->
+  </div>
+<div class="footer">
+  <h2>Footer</h2>
+</div>
+
+</body>
+</html>

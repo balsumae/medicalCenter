@@ -1,0 +1,42 @@
+<head>
+  <meta charset="utf-8">
+  <title>Login Form</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/loginAndRegister.css" />
+</head>
+
+<body>
+<div class="box">
+  <h1>Login</h1>
+  <% if (messages.error) { %>
+      <%= messages.error %>
+  <% } %>
+    <div class="inputBox">
+        <input type="text" id="DRNO" name="DRNO" placeholder="Enter Doctor Id" required>
+    </div>
+    <div class="inputBox">
+        <input type="password" id="password" name="password" placeholder="Enter Password" required>
+    </div>
+    <button class="button button" id="btnLogin"  type="submit">Login</button>
+  <label for="register">Not registered?</label> <a href="/register"> Create an account.</a><br>
+  <label for="register">Forgot your password?</label> <a href="/resetPassword"> Click here.</a>
+
+</div>
+<script>
+  const btnLogin = document.getElementById("btnLogin");
+  const DRNO = document.getElementById("DRNO");
+  const password = document.getElementById("password");
+
+  btnLogin.addEventListener("click", async (res) =>{
+    const result = await fetch("/login", {"method": "POST", "headers": {"content-type": "application/json"}, "body": JSON.stringify({"DRNO": DRNO.value, "password": password.value})})
+    const jResult = await result.json();
+    console.log("here= ", jResult);
+    if (jResult.message) {
+      alert(JSON.stringify(jResult.message));
+      location.reload()
+    } 
+    if (jResult.success) {
+      location.href = "/";
+    }
+  });
+</script>
+</body>

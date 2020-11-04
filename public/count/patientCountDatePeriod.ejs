@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>KFMMC - Patients Page </title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.css">
+<link rel="stylesheet" type="text/css" media="screen" href="./css/styles.css" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
+<!-- <script src="./js/scripts.js"></script> -->
+
+</head>
+
+<body>
+  <div class="header">
+    <img src="../images/KFMMC_LogoEn.png" alt="KFMMC" style="width:650px;height:200px;">
+ </div>
+
+ <div class="navigationBar">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a class="active1" href="/patients">Patients</a></li>
+      <li style="float:right"><a href="/login">Logout</a></li>
+    </ul>
+ </div>
+  
+
+ <div class="row">
+  <div class="side">
+    <h6><strong>Patient Count Section</strong></h6>
+    <a href="/patientCountYear">Patient Year Count</a>
+    <a href="/patientCountDatePeriod" class="active2">Patient Date Or Period Count</a>
+    <a href="/patientCountDatePeriodSymptom">Patient Date Or Period Disease Count</a>
+
+    <h6><strong>Patient Details Section</strong></h6>
+    <a href="/patientDetailsYear">Patient Details For Year</a>
+    <a href="/patientDetailsDatePeriod">Patient Details For Date Or Period</a>
+    <a href="/patientDetailsDatePeriodSymptom">Patient Details Date Or Period Disease </a>
+
+    <h6><strong>Patient Count Comparison Section</strong></h6>
+    <a href="/patientCountYearComparison">Patient Year Count Comparison</a>
+    <a href="/patientCountDatePeriodComparison">Patient Date Or Period Count Comparison</a>
+    <a href="/patientCountDatePeriodSymptomComparison">Patient Date Or Period Disease Count Comparison</a>
+  </div>
+
+  <div class="main">
+    <br>
+              <br>
+            <h5 style="color:red;"><strong>Select a specific date or specific period </strong> </h5>
+            <br>
+            <br>
+             <div class="form-group input-daterange"> 
+              <label id="start-p" for="start">Start Date</label> 
+              <input type="text" id="start">
+               <span class="fa fa-calendar" id="fa-1"></span>
+               <label  id="end-p" for="end">End Date</label> 
+               <input type="text" id="end" > 
+               <span class="fa fa-calendar" id="fa-2"></span> 
+               <br>
+               <br>
+              </div>
+              <button type="submit" id="btnDateRange" class="btn btn-secondary">Submit</button>
+              <br>
+              <br>
+              <p id="pRange"></p>
+            
+              
+            <script>
+            $(document).ready(function(){
+                $('.input-daterange').datepicker({
+                    format: 'dd-mm-yyyy',
+                    autoclose: true,
+                    calendarWeeks : true,
+                    clearBtn: true,
+                    disableTouchKeyboard: true
+                });
+            });
+            </script>
+  </div>
+ 
+  <script>
+    const start = document.getElementById("start");
+    // const start = "start".datepicker();
+    const end = document.getElementById("end");
+    const date = document.getElementById("date");
+    const btnMonth = document.getElementById("btnMonth");
+    const month = document.getElementById("month");
+    const btnDateRange = document.getElementById("btnDateRange");
+    
+    btnDateRange.addEventListener("click", async() =>{
+      if (start.value == end.value) {
+        const result = await fetch("/date/count", {"method": "POST", "headers": {"content-type": "application/json"}, "body": JSON.stringify({"date": start.value})});
+        const jResult = await result.json();
+        const output = document.getElementById("pRange");
+        output.innerHTML = "The Total Number of Patients: " + JSON.stringify(jResult);
+      } else {
+        const result = await fetch("/range/count", {"method": "POST", "headers": {"content-type": "application/json"}, "body": JSON.stringify({"start": start.value, "end": end.value})});
+        const jResult = await result.json();
+        const output = document.getElementById("pRange");
+        output.innerHTML = "The Total Number of Patients: " + JSON.stringify(jResult);
+      }
+    });
+
+    // if (start.value == end.value) {
+    //   console.log("here ====");
+    //   console.log(end.value);
+    //   // btnDateRange.addEventListener("click", async() =>{
+    //   //   const result = await fetch("/date", {"method": "POST", "headers": {"content-type": "application/json"}, "body": JSON.stringify({"date": start.value})});
+    //   //   const jResult = await result.json();
+    //   //   const output = document.getElementById("pDate");
+    //   //   output.innerHTML = JSON.stringify(jResult);
+    //   // });
+    // } else {
+    //   btnDateRange.addEventListener("click", async() =>{
+    //     const result = await fetch("/range", {"method": "POST", "headers": {"content-type": "application/json"}, "body": JSON.stringify({"start": start.value, "end": end.value})});
+    //     // const jResult = await result.json();
+    //     // const output = document.getElementById("pDate");
+    //     // output.innerHTML = JSON.stringify(jResult);
+    //   });
+    // }
+
+    // btnDate.addEventListener("click", async() =>{
+    //   const result = await fetch("/date", {"method": "POST", "headers": {"content-type": "application/json"}, "body": JSON.stringify({"date": date.value})});
+    //   const jResult = await result.json();
+    //   const output = document.getElementById("pDate");
+    //   output.innerHTML = JSON.stringify(jResult);
+    //   // alert(JSON.stringify(jResult))
+    // });
+
+    // btnMonth.addEventListener("click", async() => {
+    //   const result = await fetch("/month", {"method": "POST", "headers": {"content-type": "application/json"}, "body": JSON.stringify({"month": month.value})});
+    //   const jResult = await result.json();
+    //   const output = document.getElementById("pMonth");
+    //   output.innerHTML = JSON.stringify(jResult);
+    //   });
+        
+  </script>
+
+
+<div class="footer">
+  <h2>Footer</h2>
+</div>
+
+</body>
+</html>
